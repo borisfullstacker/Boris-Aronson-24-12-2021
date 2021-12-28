@@ -1,0 +1,19 @@
+<form class="search-form">
+  <mat-form-field>
+    <mat-label>Weather location</mat-label>
+    <mat-icon class="search-icon">search</mat-icon>
+
+    <input type="text" placeholder="type to search for weather location" matInput [formControl]="searchControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete [displayWith]="displayFn" (optionSelected)="onSelect()" #auto="matAutocomplete">
+      <mat-option  *ngFor="let option of options"
+        [value]="option">
+        {{option.label}}
+        <mat-icon *ngIf='appState.isFavorite(option)' class="favorite-icon">favorite</mat-icon>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="error-container">
+    <span *ngIf='searchControl?.errors?.forbiddenText' >Please use only English letters</span>
+  </div>
+</form>

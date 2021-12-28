@@ -1,0 +1,23 @@
+<div class="main-container">
+  <h3 class="title">Favorites</h3>
+  <div class="card-container">
+      <mat-card *ngFor='let favorite of favorites' class="example-card" (click)="showForecast(favorite)">
+          <mat-card-header>
+            <div mat-card-avatar  [ngStyle]="{'background-image': 'url(' + favorite.currentWeather.icon + ')','background-size': 'cover','width':'60px'}"></div>
+            <mat-card-title>{{favorite.name}}</mat-card-title>
+            <mat-card-subtitle>{{favorite.currentWeather.val | fToC:appState.isFahrenheit}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ favorite.currentWeather.text }}</p>
+          </mat-card-content>
+          <mat-card-footer>
+            <mat-progress-bar *ngIf='!favorite.currentWeather.text' mode="indeterminate"></mat-progress-bar>
+          </mat-card-footer>
+        </mat-card>
+        <div *ngIf='favorites.length===0'>
+          <span>No favorites available</span>
+
+        </div>
+  </div>  
+
+</div>

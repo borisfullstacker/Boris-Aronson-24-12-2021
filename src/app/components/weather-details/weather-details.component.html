@@ -1,0 +1,51 @@
+<div class="main-container">
+  <app-search (selected)='setPageState($event)'></app-search>
+  <div class="weather-app-container">
+    <div class="inner-header">
+      <div class="location-contianer">
+        <!-- <img [src]='dailyTemperatures[0].icon' width="70" height="50"/> -->
+        <div mat-card-avatar  [ngStyle]="{'background-image': 'url(' + dailyTemperatures[0]?.icon + ')','background-size': 'cover','width':'60px'}"></div>
+        <div>
+          <p>{{country?.label}}</p>
+          <p>{{dailyTemperatures[0]?.val | fToC:appState.isFahrenheit}}</p>
+        </div>
+      </div>
+      <div class="btn-continaer">
+        <div *ngIf='isFavorite'>
+          <label class="fave">
+            remove from favorites
+          </label>
+          <button (click)='toggleFavorite()' mat-icon-button color="warn">
+            <mat-icon>favorite</mat-icon>
+          </button>
+  
+        </div>
+        <div *ngIf='!isFavorite'>
+          <label  class="fave">
+            add to favorites
+          </label>
+          <button (click)='toggleFavorite()' mat-icon-button color="primary">
+            <mat-icon>favorite_border</mat-icon>
+          </button>
+  
+        </div>
+      </div>
+    </div>
+    <h3 class="title">
+      {{title}}
+    </h3>
+    <div class="card-container">
+      <mat-card *ngFor='let temperature of dailyTemperatures' class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar  [ngStyle]="{'background-image': 'url(' + temperature.icon + ')','background-size': 'cover','width':'60px'}"></div>
+          <mat-card-title class="date">{{temperature.date | dateParse}}</mat-card-title>
+          <mat-card-subtitle class="measure">{{temperature.val | fToC:appState.isFahrenheit}}</mat-card-subtitle>
+        </mat-card-header>
+  
+      </mat-card>
+    </div>
+  </div>
+  <div class="spinner-container">
+    <mat-spinner *ngIf='appState.loaderEmitter|async' [diameter]="35"></mat-spinner>
+  </div>
+</div>

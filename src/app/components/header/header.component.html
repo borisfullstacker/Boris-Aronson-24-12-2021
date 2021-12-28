@@ -1,0 +1,18 @@
+<header>
+    <div class="app-title">
+        <span>
+            Herolo Weather App
+        </span>
+        <mat-checkbox title='toggle farenhite' (change)='toggleFar()' class='checkbox' color='primary'></mat-checkbox>
+        <span> &#8457;</span>
+    </div>
+
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <a routerLink="/weather-details">
+            <mat-button-toggle>Home</mat-button-toggle>
+        </a>
+        <a routerLink="/favorites">
+            <mat-button-toggle>Favorites</mat-button-toggle>
+        </a>
+    </mat-button-toggle-group>
+</header>
